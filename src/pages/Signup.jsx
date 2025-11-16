@@ -37,6 +37,7 @@ function Signup() {
 
       const response = await axios.post('/api/user/signup', signupData);
       console.log('회원가입 성공:', response.data);
+      // 숙제: 회원가입 성공 시 회원가입 성공 페이지로 이동하게 하기, 실패하면 alert말고 실패 메세지를 하단에 뜨게 하기, 상단에 gnb로 만들어줘
       alert('회원가입이 완료되었습니다!');
       navigate('/');
     } catch (error) {

@@ -4,6 +4,8 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import './App.css'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
+import Success from './pages/Success'
+import { AuthProvider } from './context/AuthContext.jsx';
 
 //state(상태)를 정의하고 초기화한다
 // const [count, setCount] = useState(0); // count라는 상태를 정의하고 초기값을 0으로 설정
@@ -47,11 +49,18 @@ function App() {
   const [user, setUser] = useState(null);
 
   return (
-    <Routes>
+    <AuthProvider>
+      <Routes>
       <Route path="/" element={<Home user={user} />} />
       <Route path="/login" element={<Login setUser={setUser} />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/success" element={<Success user={user} />} />
+      <Route path="/success/service" element={<Success user={user} />} />
+      <Route path="/success/product" element={<Success user={user} />} />
+      <Route path="/success/about" element={<Success user={user} />} />
     </Routes>
+    </AuthProvider>
+    
   )
 }
 

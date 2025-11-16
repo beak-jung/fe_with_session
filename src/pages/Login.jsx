@@ -9,6 +9,7 @@ function Login({ setUser }) {
     password: ''
   });
 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -42,9 +43,9 @@ function Login({ setUser }) {
           userData = data.user;
         }
         // 2. data에 직접 사용자 정보가 있는 경우
-        else if (data.nick_name || data.username || data.name) {
+        else if (data.nick_name || data.username || data.name || data.userName) {
           userData = {
-            nick_name: data.nick_name || data.username || data.name,
+            nick_name: data.nick_name || data.username || data.name || data.userName,
             email: data.email || formData.email
           };
         }
@@ -54,8 +55,8 @@ function Login({ setUser }) {
         }
       }
       
-      // 사용자 이름 필드 확인 (nick_name, username, name 등)
-      const userName = userData?.nick_name || userData?.username || userData?.name;
+      // 사용자 이름 필드 확인 (nick_name, username, name, userName 등)
+      const userName = userData?.nick_name || userData?.username || userData?.name || userData?.userName;
       
       if (userData && userName) {
         // nick_name 필드가 없으면 추가
@@ -64,8 +65,8 @@ function Login({ setUser }) {
         }
         setUser(userData);
         console.log('사용자 정보 저장:', userData);
-        // 홈으로 이동
-        navigate('/');
+        // 성공 페이지로 이동
+        navigate('/success');
       } else {
         console.error('사용자 정보 파싱 실패. 응답 데이터:', data);
         // 사용자 정보가 없어도 로그인은 성공했으므로, 이메일을 사용자 이름으로 사용
@@ -73,7 +74,7 @@ function Login({ setUser }) {
           nick_name: formData.email.split('@')[0] || '사용자',
           email: formData.email
         });
-        navigate('/');
+        navigate('/success');
       }
     } catch (error) {
       console.error('로그인 실패:', error);
